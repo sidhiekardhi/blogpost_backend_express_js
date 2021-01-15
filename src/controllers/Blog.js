@@ -1,7 +1,8 @@
 const {validationResult} = require('express-validator');
 const BlogPost = require('../models/Blog')
 const fs = require('fs')
-const path= require('path')
+const path= require('path');
+const { text } = require('express');
 
 exports.createBlogPost = (req, res, next) => {
 
@@ -58,7 +59,44 @@ exports.getAllBlogPost = (req, res, next) => {
 
 exports.getBlogPostById= (req, res, next) => {
     const postId = req.params.postId;
+    console.log(postId)
     BlogPost.findById(postId)
+    .then(result => {
+        if (!result){
+            const error= new Error('Blog Post tidak di temukan')
+            error.errorStatus= 404;
+            throw error;
+        } else {
+            res.status(200).json({
+                message : "Data Berhasil Di temukan",
+                data : result
+            })
+        }
+    })
+    .catch(err => {
+        next(err);
+    })
+}
+
+
+
+exports.getSearchBlogPostById= (req, res, next) => {
+
+    // let title = req.params.title;
+
+    // let dataHasil = await BlogPost.find({title: {$regex: title, $options: 'i'}});
+    // res.status(200).json({
+    
+    //     status : "success",
+    //     dataLength : dataHasil.length, 
+    //     timestamp : req.requestTime,
+    //     data : dataHasil
+        
+    //     });
+
+    const title = req.params.title;
+    console.log(title)
+    BlogPost.find({title: {$regex: title, $options: 'i'}})
     .then(result => {
         if (!result){
             const error= new Error('Blog Post tidak di temukan')

@@ -20,6 +20,7 @@ const blogPost = new Schema({
     }
 }, {
     timestamps: true
-});
+}
+);
 
 module.exports= mongoose.model('BlogPost', blogPost);

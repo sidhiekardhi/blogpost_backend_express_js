@@ -76,6 +76,7 @@ app.use((error, req, res, next) => {
 mongoose.connect('mongodb://sidhiek_ardhi:123a456b@cluster0-shard-00-00.uqa5h.mongodb.net:27017,cluster0-shard-00-01.uqa5h.mongodb.net:27017,cluster0-shard-00-02.uqa5h.mongodb.net:27017/test?replicaSet=atlas-14654d-shard-0&ssl=true&authSource=admin', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 .then(() => {
     app.listen(port, () => console.log("connection success"));
+    console.log("jos gandos");
     // console.log("connection success")
 })  
 .catch(err => console.log(err))

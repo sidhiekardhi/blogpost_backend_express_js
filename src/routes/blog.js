@@ -11,6 +11,7 @@ router.post('/post',[
 
 router.get('/posts', blogController.getAllBlogPost)
 router.get('/posts/:postId', blogController.getBlogPostById)
+router.get('/posts/search/:title', blogController.getSearchBlogPostById)
 router.put('/posts/:postId', [
     body('title'). isLength({min : 5}).withMessage('input title tidak sesuai'),
     body('body').isLength({min: 5}).withMessage('input body tidak sesuai')
